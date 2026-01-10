@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Jeanlouis Rebello — Mobile Engineer (React Native / Expo). 3+ years shipping production apps. Performance, UX polish, and privacy-first mobile products."
+    />
+    <meta property="og:title" content="Jeanlouis Rebello — Mobile Engineer" />
+    <meta
+      property="og:description"
+      content="React Native / Expo • TypeScript • Shipped production apps • Montreal / Remote"
+    />
+    <title>Jeanlouis Rebello — Mobile Engineer</title>
+
+    <!-- <meta
+      name="description"
+      content="Jay — Mobile & Full-Stack Developer. React Native / Expo. I build fast, privacy-first, product-ready apps."
+    />
+    <meta property="og:title" content="Jay — Developer Portfolio" />
+    <meta
+      property="og:description"
+      content="Mobile & Full-Stack Developer • React Native / Expo • Fast, privacy-first apps."
+    />
+    <meta property="og:type" content="website" />
+    <title>Jay — Developer Portfolio</title> -->
+
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --card: #0f1621;
+        --text: #e7eef7;
+        --muted: #a7b4c4;
+        --line: #203047;
+        --accent: #a855f7;
+        --accent2: #66a6ff;
+        --danger: #ff6b6b;
+        --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+        --max: 1040px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 600px at 20% -20%,
+            rgba(102, 166, 255, 0.25),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at 90% 0%,
+            rgba(168, 85, 247, 0.18),
+            transparent 60%
+          ),
+          var(--bg);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.5;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 26px 18px 80px;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(11, 15, 20, 0.7);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(32, 48, 71, 0.6);
+      }
+      .topbar .inner {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 18px rgba(168, 85, 247, 0.55),
+          0 0 30px rgba(168, 85, 247, 0.35);
+      }
+      nav {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      nav a {
+        font-size: 14px;
+        color: var(--muted);
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+      }
+      nav a:hover {
+        color: var(--text);
+        border-color: rgba(32, 48, 71, 0.8);
+        background: rgba(15, 22, 33, 0.5);
+      }
+
+      .hero {
+        padding: 34px 0 10px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(15, 22, 33, 0.92),
+          rgba(15, 22, 33, 0.78)
+        );
+        border: 1px solid rgba(32, 48, 71, 0.75);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .terminal {
+        overflow: hidden;
+      }
+      .terminalHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(32, 48, 71, 0.75);
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .traffic {
+        display: flex;
+        gap: 8px;
+      }
+      .tDot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+      }
+      .tDot.r {
+        background: #ff5f56;
+      }
+      .tDot.y {
+        background: #ffbd2e;
+      }
+      .tDot.g {
+        background: #27c93f;
+      }
+      .terminalBody {
+        padding: 16px 16px 18px;
+      }
+      .prompt {
+        color: var(--muted);
+      }
+      .cmd {
+        color: var(--accent);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 14px;
+      }
+      .h1 {
+        margin: 10px 0 8px;
+        font-size: 42px;
+        line-height: 1.1;
+        letter-spacing: -0.8px;
+      }
+      @media (max-width: 520px) {
+        .h1 {
+          font-size: 34px;
+        }
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 16px;
+        margin: 0 0 14px;
+      }
+      .ctaRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(32, 48, 71, 0.9);
+        background: rgba(11, 15, 20, 0.25);
+        color: var(--text);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      button.btn {
+        text-decoration: none;
+      }
+      .btn:hover {
+        border-color: rgba(102, 166, 255, 0.9);
+        background: rgba(102, 166, 255, 0.12);
+      }
+      .btn.primary {
+        border-color: rgba(168, 85, 247, 0.9);
+        background: rgba(168, 85, 247, 0.12);
+        box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+      }
+      .btn.primary:hover {
+        background: rgba(168, 85, 247, 0.18);
+        box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
+      }
+      .location {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 8px;
+        padding: 8px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(32, 48, 71, 0.5);
+        background: rgba(15, 22, 33, 0.3);
+      }
+      .pillRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .pill {
+        font-size: 12px;
+        color: var(--accent);
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(168, 85, 247, 0.4);
+        background: rgba(11, 15, 20, 0.25);
+      }
+
+      .side {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .side h3 {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .kv {
+        display: grid;
+        gap: 10px;
+      }
+      .kvItem {
+        padding: 12px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(32, 48, 71, 0.65);
+        background: rgba(11, 15, 20, 0.25);
+      }
+      .kvItem .k {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .kvItem .v {
+        font-weight: 700;
+        margin-top: 4px;
+      }
+      .kvItem .v small {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      section {
+        margin-top: 22px;
+      }
+      .sectionHead {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0 0 10px;
+      }
+      .sectionHead h2 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .sectionHead p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 12px;
+      }
+      .col6 {
+        grid-column: span 6;
+      }
+      .col4 {
+        grid-column: span 4;
+      }
+      .col8 {
+        grid-column: span 8;
+      }
+      .col12 {
+        grid-column: span 12;
+      }
+      @media (max-width: 900px) {
+        .col6,
+        .col4,
+        .col8 {
+          grid-column: span 12;
+        }
+      }
+
+      .panel {
+        padding: 16px;
+      }
+      .panel p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+      .list {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+      .list li {
+        margin: 6px 0;
+      }
+      .tagRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .tag {
+        font-size: 12px;
+        color: rgba(231, 238, 247, 0.9);
+        border: 1px solid rgba(32, 48, 71, 0.75);
+        background: rgba(15, 22, 33, 0.55);
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+
+      .proj {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .projTop {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .projIcon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .projTitle {
+        margin: 0;
+        font-size: 16px;
+      }
+      .badge {
+        font-size: 11px;
+        color: var(--accent);
+        border: 1px solid rgba(168, 85, 247, 0.4);
+        background: rgba(168, 85, 247, 0.1);
+        padding: 5px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+      }
+      .meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer {
+        margin-top: 28px;
+        padding: 16px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        border: 1px solid rgba(32, 48, 71, 0.6);
+        border-radius: var(--radius);
+        background: rgba(15, 22, 33, 0.55);
+      }
+
+      .notice {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 107, 107, 0.35);
+        background: rgba(255, 107, 107, 0.07);
+        color: rgba(231, 238, 247, 0.9);
+        font-size: 13px;
+      }
+      .notice strong {
+        color: #ffd1d1;
+      }
+
+      /* Popup/Modal Styles */
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .popup-overlay.active {
+        display: flex;
+      }
+      .popup-content {
+        background: linear-gradient(
+          180deg,
+          rgba(15, 22, 33, 0.98),
+          rgba(15, 22, 33, 0.95)
+        );
+        border: 1px solid rgba(32, 48, 71, 0.9);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 24px;
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        animation: popupFadeIn 0.2s ease-out;
+      }
+      @keyframes popupFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .popup-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-size: 24px;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+      .popup-close:hover {
+        color: var(--text);
+        background: rgba(32, 48, 71, 0.5);
+      }
+      .popup-title {
+        margin: 0 0 16px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .popup-email {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        background: rgba(11, 15, 20, 0.5);
+        border: 1px solid rgba(32, 48, 71, 0.75);
+        border-radius: 12px;
+        margin-bottom: 16px;
+      }
+      .popup-email-text {
+        flex: 1;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 15px;
+        color: var(--text);
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+      .popup-copy-btn {
+        padding: 8px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(102, 166, 255, 0.6);
+        background: rgba(102, 166, 255, 0.12);
+        color: var(--accent2);
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-width: 70px;
+      }
+      .popup-copy-btn:hover {
+        background: rgba(102, 166, 255, 0.2);
+        border-color: rgba(102, 166, 255, 0.9);
+      }
+      .popup-copy-btn.copied {
+        background: rgba(39, 201, 63, 0.15);
+        border-color: rgba(39, 201, 63, 0.6);
+        color: #27c93f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="topbar">
+      <div class="inner">
+        <div class="brand">
+          <span class="dot"></span>
+          <span>Jeanlouis • Mobile Engineer</span>
+          <!-- <span>Jay • Developer</span> -->
+        </div>
+        <nav>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="wrap">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="card terminal">
+          <div class="terminalHeader">
+            <div class="traffic">
+              <span class="tDot r"></span><span class="tDot y"></span
+              ><span class="tDot g"></span>
+            </div>
+            <div class="mono">jeanlouis@portfolio — zsh</div>
+            <!-- <div class="mono">jay@portfolio — zsh</div> -->
+          </div>
+
+          <div class="terminalBody mono">
+            <div class="prompt">
+              jeanlouis@portfolio <span style="color: var(--muted)">%</span>
+              <span class="cmd">whoami</span>
+            </div>
+
+            <div class="h1" style="font-family: inherit">
+              Mobile & Full-Stack Developer
+            </div>
+
+            <p class="subtitle">
+              I’m a <strong>Mobile Engineer</strong> specializing in
+              <strong>React Native / Expo</strong> with
+              <strong>3+ years</strong> shipping production mobile applications.
+              I focus on <strong>performance</strong>,
+              <strong>maintainable architecture</strong>, and
+              <strong>UX polish</strong>—with a strong interest in
+              <strong>privacy & security</strong>.
+            </p>
+            <!-- <p class="subtitle">
+              I build fast, product-ready apps with
+              <strong>React Native / Expo</strong>, TypeScript, and modern data
+              stacks. I care about <strong>performance</strong>,
+              <strong>UX polish</strong>, and
+              <strong>privacy-by-design</strong>.
+            </p> -->
+
+            <div class="ctaRow">
+              <!-- TODO: replace # with real links -->
+              <a class="btn primary" href="#projects">View Projects</a>
+              <button
+                class="btn contactBtn"
+                title="Email"
+                >Contact</button
+              >
+              <!-- <a class="btn" href="#" title="Replace with your resume link"
+                >Resume (PDF)</a
+              > -->
+              <a
+                class="btn"
+                href="https://github.com/distinctmind"
+                target="_blank"
+                title="Github Profile"
+                >GitHub</a
+              >
+              <a
+                class="btn"
+                href="https://www.linkedin.com/in/jeanlouisrebello/"
+                target="_blank"
+                title="Linkedin Profile"
+                >LinkedIn</a
+              >
+            </div>
+
+            <div class="location">
+              <span>📍</span>
+              <span>Montreal / Remote</span>
+            </div>
+
+            <div class="pillRow">
+              <span class="pill">React Native • Expo</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill">SQLite • Drizzle</span>
+              <span class="pill">TanStack Query</span>
+              <span class="pill">SwiftUI (native iOS)</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card side">
+          <h3>Snapshot</h3>
+          <div class="kv">
+            <div class="kvItem">
+              <div class="k">Focus</div>
+              <div class="v">
+                Mobile-first products <small>(speed + polish)</small>
+              </div>
+            </div>
+            <div class="kvItem">
+              <div class="k">Strengths</div>
+              <div class="v">Architecture • Testing • UX Polish</div>
+              <!-- <div class="v">Architecture • UX • Shipping</div> -->
+            </div>
+            <div class="kvItem">
+              <div class="k">Special interest</div>
+              <div class="v">Privacy & Security</div>
+            </div>
+            <!-- <div class="kvItem">
+              <div class="k">Also</div>
+              <div class="v">Content creation • entrepreneurship</div>
+            </div> -->
+          </div>
+          <div class="kvItem">
+            <div class="k">Work status</div>
+            <div class="v">US & Canadian citizen</div>
+          </div>
+
+          <div style="margin-top: auto">
+            <h3>What I’m looking for</h3>
+            <p style="margin: 8px 0 0; color: var(--muted)">
+              Mobile Engineer roles (React Native / Expo) where I can own
+              features end-to-end, ship production work, and collaborate closely
+              with product/design.
+            </p>
+            <!-- <p style="margin: 8px 0 0; color: var(--muted)">
+              Mobile Engineer / Full-Stack Engineer roles where I can own
+              features end-to-end and ship fast.
+            </p> -->
+          </div>
+        </aside>
+      </div>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="sectionHead">
+          <h2>Featured Projects</h2>
+          <p>Simple, product-focused, shipped mindset.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card proj col6">
+            <div class="projTop">
+              <div
+                style="display: flex; align-items: center; gap: 10px; flex: 1"
+              >
+                <img
+                  src="assets/noeye-icon.png"
+                  alt="NoEye icon"
+                  class="projIcon"
+                />
+                <h3 class="projTitle">NoEye — EXIF / Metadata Privacy Tool</h3>
+              </div>
+              <span class="badge">Privacy</span>
+            </div>
+            <p class="meta">
+              Mobile app concept: view + remove photo metadata (EXIF), with
+              selective field control.
+            </p>
+            <div class="tagRow">
+              <span class="tag">Expo</span><span class="tag">React Native</span
+              ><span class="tag">TypeScript</span>
+              <span class="tag">Media Library</span
+              ><span class="tag">Privacy-by-design</span>
+            </div>
+            <ul class="list">
+              <li>
+                Shipped and published an iOS app for viewing, removing, and
+                editing photo metadata (EXIF).
+              </li>
+              <li>
+                Built a clear “trust-first” UX: users preview exactly what will
+                be removed before saving a clean copy.
+              </li>
+              <li>
+                Optimized detail screens for large metadata payloads with
+                predictable state and fast rendering.
+              </li>
+            </ul>
+            <!-- <ul class="list">
+              <li>
+                Designed a “trust-first” UX: clear metadata visibility before
+                deleting.
+              </li>
+              <li>
+                Built a clean navigation and detail view architecture for deep
+                metadata inspection.
+              </li>
+              <li>
+                Focused on fast rendering + predictable state updates for large
+                photo libraries.
+              </li>
+            </ul> -->
+            <div class="ctaRow">
+              <a
+                class="btn"
+                href="https://apps.apple.com/us/app/noeye/id6751863604"
+                target="_blank"
+                title="App Store App"
+                >Live / Store</a
+              >
+              <!-- <a
+                class="btn"
+                href="#"
+                title="Replace with a short demo video link"
+                >Demo video</a
+              > -->
+            </div>
+          </article>
+
+          <article class="card proj col6">
+            <div class="projTop">
+              <div
+                style="display: flex; align-items: center; gap: 10px; flex: 1"
+              >
+                <img
+                  src="assets/anchpor-icon.png"
+                  alt="Anchpor icon"
+                  class="projIcon"
+                />
+                <h3 class="projTitle">Anchpor — Asset Assistant</h3>
+              </div>
+              <span class="badge finance">Finance</span>
+            </div>
+            <p class="meta">
+              Production financial assets app — led full-cycle mobile
+              development with React Native, TypeScript, and Expo. Built for a
+              clean overview of assets, multi-currency support, and a smooth,
+              responsive UX.
+            </p>
+            <div class="tagRow">
+              <span class="tag">React Native</span
+              ><span class="tag">TypeScript</span><span class="tag">Expo</span>
+              <span class="tag">Finance</span><span class="tag">Mobile UX</span>
+            </div>
+            <ul class="list">
+              <li>
+                Led end-to-end development of core user flows and
+                production-ready UI/UX for a financial assets product.
+              </li>
+              <li>
+                Implemented reliable data presentation patterns
+                (loading/empty/error states) for a smooth “always clear”
+                experience.
+              </li>
+              <li>
+                Built and maintained E2E test coverage for critical flows using
+                <strong>Maestro</strong>.
+              </li>
+            </ul>
+            <div class="ctaRow">
+              <a
+                class="btn"
+                href="https://apps.apple.com/us/app/anchpor-asset-assistant/id6504777563"
+                target="_blank"
+                title="App Store Link"
+                >Live / Store</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="sectionHead">
+          <h2>Experience</h2>
+          <p>Production work, shipped mindset.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card panel col12">
+            <ul class="list" style="margin-top: 0">
+              <li>
+                <strong>Mobile Engineer — Knewplay (Ottawa)</strong> • Led
+                full-cycle development of a financial assets app using React
+                Native, TypeScript, and Expo. Built E2E test suites with
+                Maestro.
+              </li>
+              <li>
+                <strong>React Native Developer — Golf North (Toronto)</strong> •
+                Integrated receipt printing via Printer SDK + native modules +
+                backend APIs into a reusable hook. Onboarded teammates and
+                reviewed PRs.
+              </li>
+              <li>
+                <strong>Software Developer — BlueCat (Toronto)</strong> •
+                Developed enterprise features and collaborated cross-team in an
+                agile environment. Presented demos to stakeholders.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="sectionHead">
+          <h2>Skills</h2>
+          <p>Curated, practical, shippable.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card panel col4">
+            <h3 style="margin: 0">Mobile</h3>
+            <p>
+              React Native / Expo, Expo Router, performance, animations basics,
+              App Store delivery workflows.
+            </p>
+            <div class="tagRow">
+              <span class="tag">React Native</span><span class="tag">Expo</span
+              ><span class="tag">TypeScript</span>
+              <span class="tag">SwiftUI</span>
+            </div>
+          </div>
+
+          <div class="card panel col4">
+            <h3 style="margin: 0">Data</h3>
+            <p>
+              Local-first apps and predictable fetching patterns for a smooth
+              UX.
+            </p>
+            <div class="tagRow">
+              <span class="tag">SQLite</span><span class="tag">Drizzle ORM</span
+              ><span class="tag">TanStack Query</span>
+              <span class="tag">Schema design</span>
+            </div>
+          </div>
+
+          <div class="card panel col4">
+            <h3 style="margin: 0">Engineering</h3>
+            <p>
+              Clean architecture, pragmatic shipping, and strong testing habits
+              for production apps.
+            </p>
+            <div class="tagRow">
+              <span class="tag">Component design</span
+              ><span class="tag">State management</span
+              ><span class="tag">Debugging</span>
+              <span class="tag">Logging</span>
+              <span class="tag">Maestro (E2E)</span
+              ><span class="tag">PR Reviews</span
+            </div>
+          </div>
+        </div>
+        <div class="card panel col4">
+          <h3 style="margin: 0">Tools</h3>
+          <p>Git, Bash, and AI-assisted workflows for faster iteration.</p>
+          <div class="tagRow">
+            <span class="tag">Git</span><span class="tag">Bash</span>
+            <span class="tag">Cursor</span><span class="tag">Claude</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="sectionHead">
+          <h2>About</h2>
+          <p>Hello world :)</p>
+        </div>
+
+        <div class="grid">
+          <div class="card panel col8">
+            <h3 style="margin: 0">
+              I like building useful things that feel great to use.
+            </h3>
+            <p>
+              My sweet spot is taking an idea from “rough prototype” to a
+              product that feels polished: fast screens, clean UX, clear copy,
+              and a maintainable codebase. I’m especially interested in
+              privacy-first tooling and apps that respect the user by default.
+            </p>
+            <ul class="list">
+              <li>
+                Bias toward simplicity: fewer screens, fewer taps, fewer bugs.
+              </li>
+              <li>
+                Strong opinions on “boring is good”: predictable state, stable
+                data flows, readable code.
+              </li>
+              <li>
+                Product-minded engineer: I shape UX flows, write clear in-app copy, and ship features end-to-end.
+              </li>
+            </ul>
+          </div>
+
+          <div class="card panel col4">
+            <h3 style="margin: 0">Highlights</h3>
+            <ul class="list">
+              <li>
+                Mobile-first architecture (Expo Router + scalable folder
+                structure)
+              </li>
+              <li>Local-first patterns (SQLite + Drizzle + query caching)</li>
+              <li>Privacy & metadata awareness (EXIF workflows)</li>
+              <li>Entrepreneurial execution (ship, test, iterate)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="sectionHead">
+          <h2>Contact</h2>
+          <p>One message away.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card panel col12">
+            <p style="margin: 0; color: var(--muted)">
+              Want to chat about a role or a project? Email me and I’ll reply
+              quickly.
+            </p>
+            <div class="ctaRow" style="margin-top: 12px">
+              <!-- TODO: replace placeholders -->
+              <button class="btn primary contactBtn">Contact</button>
+              <a
+                class="btn"
+                href="https://www.linkedin.com/in/jeanlouisrebello/"
+                target="_blank"
+                >LinkedIn</a
+              >
+              <a
+                class="btn"
+                href="https://github.com/distinctmind"
+                target="_blank"
+                >GitHub</a
+              >
+              <!-- <a class="btn" href="#">Resume (PDF)</a> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <span style="font-size: 15px; color: var(--muted)">Made with 💜</span>
+        <br />
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <span class="mono" style="opacity: 0.75; padding-top: 10px"
+            >© <span id="year"></span> Jay</span
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Contact Popup -->
+    <div class="popup-overlay" id="contactPopup">
+      <div class="popup-content">
+        <button class="popup-close" id="closePopup">&times;</button>
+        <h3 class="popup-title">Get in Touch</h3>
+        <div class="popup-email">
+          <span class="popup-email-text" id="emailText">jeanlouisrebello@gmail.com</span>
+          <button class="popup-copy-btn" id="copyBtn">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Contact popup functionality
+      const contactBtns = document.querySelectorAll(".contactBtn");
+      const contactPopup = document.getElementById("contactPopup");
+      const closePopup = document.getElementById("closePopup");
+      const copyBtn = document.getElementById("copyBtn");
+      const emailText = document.getElementById("emailText");
+      const email = "jeanlouisrebello@gmail.com";
+
+      // Open popup for all contact buttons
+      contactBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          contactPopup.classList.add("active");
+        });
+      });
+
+      // Close popup
+      closePopup.addEventListener("click", () => {
+        contactPopup.classList.remove("active");
+        copyBtn.textContent = "Copy";
+        copyBtn.classList.remove("copied");
+      });
+
+      // Close popup when clicking outside
+      contactPopup.addEventListener("click", (e) => {
+        if (e.target === contactPopup) {
+          contactPopup.classList.remove("active");
+          copyBtn.textContent = "Copy";
+          copyBtn.classList.remove("copied");
+        }
+      });
+
+      // Copy email to clipboard
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyBtn.textContent = "Copied!";
+          copyBtn.classList.add("copied");
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+            copyBtn.classList.remove("copied");
+          }, 2000);
+        } catch (err) {
+          // Fallback for older browsers
+          const textArea = document.createElement("textarea");
+          textArea.value = email;
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand("copy");
+            copyBtn.textContent = "Copied!";
+            copyBtn.classList.add("copied");
+            setTimeout(() => {
+              copyBtn.textContent = "Copy";
+              copyBtn.classList.remove("copied");
+            }, 2000);
+          } catch (fallbackErr) {
+            copyBtn.textContent = "Failed";
+          }
+          document.body.removeChild(textArea);
+        }
+      });
+
+      // Close popup with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && contactPopup.classList.contains("active")) {
+          contactPopup.classList.remove("active");
+          copyBtn.textContent = "Copy";
+          copyBtn.classList.remove("copied");
+        }
+      });
+    </script>
+  </body>
+</html>
