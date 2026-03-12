@@ -13,6 +13,7 @@
       content="React Native / Expo • TypeScript • Shipped production apps • Montreal / Remote"
     />
     <title>Jeanlouis Rebello — Mobile Engineer</title>
+    <base href="./" />
 
     <style>
       :root {
@@ -246,6 +247,151 @@
         padding: 4px 8px;
         background: rgba(48, 54, 61, 0.5);
         border-radius: 6px;
+      }
+      .project-tags-below {
+        flex-basis: 100%;
+      }
+
+      .project-visual {
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card[data-app] {
+        cursor: pointer;
+      }
+      .project-card[data-app] .project-visual {
+        padding: 0;
+      }
+      .project-card[data-app] .project-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+      }
+
+      /* Story modal – fixed dimensions, no resize with content */
+      .story-modal-content {
+        width: 900px;
+        min-width: 900px;
+        height: 720px;
+        max-height: 90vh;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .story-modal-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        color: var(--text);
+        font-size: 24px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .story-modal-close:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .story-modal-image-wrap {
+        flex: 0 0 540px;
+        height: 540px;
+        min-height: 0;
+        padding: 32px 24px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(20, 20, 20, 0.9);
+        box-sizing: border-box;
+      }
+      .story-modal-image-wrap img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+      .story-modal-copy {
+        flex: 0 0 auto;
+        height: 180px;
+        min-height: 0;
+        padding: 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .story-modal-title {
+        margin: 0 0 8px;
+        font-size: 18px;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+      .story-modal-desc {
+        margin: 0 0 12px;
+        font-size: 15px;
+        color: var(--muted);
+        line-height: 1.5;
+        overflow-y: auto;
+        max-height: 60px;
+        flex: 1;
+        min-height: 0;
+      }
+      .story-modal-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .story-modal-prev,
+      .story-modal-next {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--muted);
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .story-modal-prev:hover:not(:disabled),
+      .story-modal-next:hover:not(:disabled) {
+        color: var(--text);
+        border-color: var(--muted);
+      }
+      .story-modal-prev:disabled,
+      .story-modal-next:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .story-modal-progress {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      @media (max-width: 960px) {
+        .story-modal-content {
+          width: 100%;
+          min-width: 0;
+          margin: 12px;
+          height: 85vh;
+        }
+        .story-modal-image-wrap {
+          flex: 1;
+          min-height: 0;
+          height: auto;
+        }
       }
 
       /* Experience */
@@ -574,9 +720,8 @@
         <p class="hero-tagline">Passionate about creating</p>
         <p class="hero-bio">
           <!-- I build mobile and web apps that I genuinely believe in — -->
-          I design and build full-stack apps with React Native, Expo, and
-          Next.js. Clean architecture, strong UX, and shipping end-to-end are my
-          focus.
+          I design and build full-stack apps with a focus on mobile apps. Clean
+          architecture, strong UX, and shipping end-to-end are my focus.
         </p>
         <div class="hero-cta">
           <button class="btn btn-text contactBtn">Contact</button>
@@ -598,15 +743,16 @@
       <section id="apps">
         <h2 class="section-title">Apps</h2>
         <div class="projects-list">
-          <a
-            href="https://unreleased-vault.vercel.app/"
-            target="_blank"
+          <div
             class="project-card"
+            data-app="unreleased-vault"
+            role="button"
+            tabindex="0"
           >
             <div class="project-visual">
               <img
-                src="assets/unreleased-vault-homepage.jpg"
-                alt="Unreleased Vault App"
+                src="./assets/unreleased-vault/dashboard.png"
+                alt="Unreleased Vault dashboard"
               />
             </div>
             <div class="project-body">
@@ -618,7 +764,12 @@
                 management.
               </p>
               <div class="project-meta">
-                <span class="project-link">View Web App →</span>
+                <a
+                  href="https://unreleased-vault.vercel.app/"
+                  target="_blank"
+                  class="project-link"
+                  >View Web App →</a
+                >
                 <span class="project-tags">
                   <span>Next.js</span>
                   <span>Prisma</span>
@@ -627,14 +778,38 @@
                 </span>
               </div>
             </div>
-          </a>
+          </div>
+          <div class="project-card" data-app="blaze" role="button" tabindex="0">
+            <div class="project-visual">
+              <img src="./assets/blaze/cover.PNG" alt="Blaze dashboard" />
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Blaze — Gamified Growth</h3>
+              <p class="project-desc">
+                iOS & Android app for tracking personal growth throughout year.
+                Accomplish missions in life, gain stardust, compete with
+                friends.
+                <!-- Streaks, monthly overviews, and social accountability features. -->
+              </p>
+              <div class="project-meta">
+                <span class="project-link">Coming soon</span>
+                <span class="project-tags project-tags-below">
+                  <span>React Native</span>
+                  <span>Expo</span>
+                  <span>Supabase</span>
+                  <span>OTA</span>
+                  <span>Sentry</span>
+                </span>
+              </div>
+            </div>
+          </div>
           <a
             href="https://apps.apple.com/us/app/noeye/id6751863604"
             target="_blank"
             class="project-card"
           >
             <div class="project-visual">
-              <img src="assets/noeye-icon.png" alt="NoEye app" />
+              <img src="./assets/noeye-icon.png" alt="NoEye app" />
             </div>
             <div class="project-body">
               <h3 class="project-title">NoEye — Metadata Privacy App</h3>
@@ -661,7 +836,7 @@
         <div class="experience-list">
           <div class="experience-item">
             <img
-              src="assets/knewplay-icon.png"
+              src="./assets/knewplay-icon.png"
               alt="Knewplay"
               class="experience-icon"
             />
@@ -684,7 +859,7 @@
           </div>
           <div class="experience-item">
             <img
-              src="assets/golfnorth-icon.png"
+              src="./assets/golfnorth-icon.png"
               alt="Golf North"
               class="experience-icon"
             />
@@ -705,7 +880,7 @@
           </div>
           <div class="experience-item">
             <img
-              src="assets/bluecat-icon.png"
+              src="./assets/bluecat-icon.png"
               alt="BlueCat"
               class="experience-icon"
             />
@@ -810,6 +985,50 @@
       </div>
     </div>
 
+    <div
+      class="popup-overlay"
+      id="storyPopup"
+      aria-modal="true"
+      aria-label="App screens"
+    >
+      <div class="story-modal-content">
+        <button
+          type="button"
+          class="story-modal-close"
+          id="storyClose"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div class="story-modal-image-wrap">
+          <img id="storyImage" src="" alt="" />
+        </div>
+        <div class="story-modal-copy">
+          <h3 class="story-modal-title" id="storyTitle"></h3>
+          <p class="story-modal-desc" id="storyDesc"></p>
+          <div class="story-modal-nav">
+            <button
+              type="button"
+              class="story-modal-prev"
+              id="storyPrev"
+              aria-label="Previous"
+            >
+              Prev
+            </button>
+            <span class="story-modal-progress" id="storyProgress"></span>
+            <button
+              type="button"
+              class="story-modal-next"
+              id="storyNext"
+              aria-label="Next"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       const contactBtns = document.querySelectorAll(".contactBtn");
       const contactPopup = document.getElementById("contactPopup");
@@ -875,6 +1094,201 @@
           copyBtn.classList.remove("copied");
         }
       });
+    </script>
+    <script>
+      const APP_STORIES = {
+        "unreleased-vault": [
+          {
+            src: "./assets/unreleased-vault/register.png",
+            title: "Create Account (Listener / Artist)",
+            description:
+              "Create an account through email/google authentication. Listeners can tune into an artist vault, while artists can create and share their own music vault.",
+          },
+          // {
+          //   src: "./assets/unreleased-vault/login.png",
+          //   title: "Login",
+          //   description:
+          //     "Sign-in screen with Firebase Auth. Users can log in or register to access their vault.",
+          // },
+          {
+            src: "./assets/unreleased-vault/dashboard.png",
+            title: "Main Dashboard",
+            description:
+              "Artists can see their unreleased vault. They can play music from each release directly from the dashboard.",
+          },
+          {
+            src: "./assets/unreleased-vault/add_work.png",
+            title: "Add Release",
+            description:
+              "Artist can create a new release by uploading song, cover art and title",
+          },
+          {
+            src: "./assets/unreleased-vault/work.png",
+            title: "Release Page",
+            description:
+              "See your album/single, play music. Friends can comment, as well as artist.",
+          },
+          {
+            src: "./assets/unreleased-vault/song_versions.png",
+            title: "Multiple Song Versions",
+            description:
+              "Upload multiple versions of a track, and switch between them.",
+          },
+          // {
+          //   src: "./assets/unreleased-vault/play_from_dashboard.png",
+          //   title: "Play from dashboard",
+          //   description:
+          //     "Quick play or preview of works directly from the dashboard.",
+          // },
+          {
+            src: "./assets/unreleased-vault/notifications.png",
+            title: "Notification Page",
+            description:
+              "See all notifications related to your vault (plays/likes/comments)",
+          },
+          {
+            src: "./assets/unreleased-vault/vault_access.png",
+            title: "Vault access",
+            description:
+              "Invite others to your vault and see who you've given access to your vault.",
+          },
+        ],
+        blaze: [
+          {
+            src: "./assets/blaze/signin.PNG",
+            title: "Welcome Screen",
+            description: "What you see when you first install the app.",
+          },
+          {
+            src: "./assets/blaze/signup.PNG",
+            title: "Register Account",
+            description:
+              "Users can create an account through email/google authentication.",
+          },
+          {
+            src: "./assets/blaze/dashboard.PNG",
+            title: "Sail",
+            description:
+              "See today's accomplished missions, stats (streak, XP, thoughts). You can press the wheel to add a new mission, and also press on the date to open monthly overview modal.",
+          },
+          {
+            src: "./assets/blaze/add_item.PNG",
+            title: "Chart Course",
+            description:
+              "Add a new mission accomplished. Add title, description, picture, difficulty, privacy.",
+          },
+          {
+            src: "./assets/blaze/monthly_overview.PNG",
+            title: "Monthly View",
+            description:
+              "See all your accomplished missions this month, stats and emoji-tags for each mission.",
+          },
+          {
+            src: "./assets/blaze/mates.PNG",
+            title: "Mates",
+            description:
+              "See a leaderboard of who has accumulated the most stardust this month.",
+          },
+          {
+            src: "./assets/blaze/profile.PNG",
+            title: "Captain Page",
+            description: "See your stats/level and thoughts in your logbook.",
+          },
+          {
+            src: "./assets/blaze/streak_overlay.PNG",
+            title: "Animations",
+            description: "Displaying animations for clear positive feedback.",
+          },
+        ],
+      };
+
+      (function () {
+        const storyPopup = document.getElementById("storyPopup");
+        const storyImage = document.getElementById("storyImage");
+        const storyTitle = document.getElementById("storyTitle");
+        const storyDesc = document.getElementById("storyDesc");
+        const storyProgress = document.getElementById("storyProgress");
+        const storyClose = document.getElementById("storyClose");
+        const storyPrev = document.getElementById("storyPrev");
+        const storyNext = document.getElementById("storyNext");
+
+        let currentSlides = [];
+        let currentIndex = 0;
+
+        function renderSlide() {
+          const slide = currentSlides[currentIndex];
+          if (!slide) return;
+          storyImage.src = slide.src;
+          storyImage.alt = slide.title;
+          storyTitle.textContent = slide.title;
+          storyDesc.textContent = slide.description;
+          storyProgress.textContent =
+            currentIndex + 1 + " / " + currentSlides.length;
+          storyPrev.disabled = currentIndex === 0;
+          storyNext.disabled = currentIndex === currentSlides.length - 1;
+        }
+
+        function openStory(appId) {
+          currentSlides = APP_STORIES[appId] || [];
+          currentIndex = 0;
+          if (currentSlides.length === 0) return;
+          renderSlide();
+          storyPopup.classList.add("active");
+        }
+
+        function closeStory() {
+          storyPopup.classList.remove("active");
+        }
+
+        document.querySelectorAll(".project-card[data-app]").forEach((card) => {
+          card.addEventListener("click", (e) => {
+            if (e.target.closest("a[href]")) return;
+            const appId = card.getAttribute("data-app");
+            if (appId) openStory(appId);
+          });
+          card.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            if (e.target.closest("a[href]")) return;
+            e.preventDefault();
+            const appId = card.getAttribute("data-app");
+            if (appId) openStory(appId);
+          });
+        });
+
+        storyClose.addEventListener("click", closeStory);
+        storyPopup.addEventListener("click", (e) => {
+          if (e.target === storyPopup) closeStory();
+        });
+        storyPrev.addEventListener("click", () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            renderSlide();
+          }
+        });
+        storyNext.addEventListener("click", () => {
+          if (currentIndex < currentSlides.length - 1) {
+            currentIndex++;
+            renderSlide();
+          }
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (!storyPopup.classList.contains("active")) return;
+          if (e.key === "Escape") closeStory();
+          if (e.key === "ArrowLeft") {
+            if (currentIndex > 0) {
+              currentIndex--;
+              renderSlide();
+            }
+          }
+          if (e.key === "ArrowRight") {
+            if (currentIndex < currentSlides.length - 1) {
+              currentIndex++;
+              renderSlide();
+            }
+          }
+        });
+      })();
     </script>
   </body>
 </html>
