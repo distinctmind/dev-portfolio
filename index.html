@@ -14,6 +14,12 @@
     />
     <title>Jeanlouis Rebello — Mobile Engineer</title>
     <base href="./" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       :root {
@@ -29,9 +35,11 @@
       }
       html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
       }
       body {
         margin: 0;
+        overflow-x: hidden;
         background: var(--bg);
         color: var(--text);
         font-family:
@@ -72,9 +80,51 @@
       }
 
       /* Hero */
-      .hero-minimal {
-        padding: 64px 0 80px;
+      .hero {
+        position: relative;
+        width: 100%;
+        min-height: 45vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
+        overflow: hidden;
+      }
+      .hero-image {
+        background-image: url("./assets/jl-gobig.jpeg");
+        background-size: cover;
+        background-position: center;
+      }
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.52);
+        pointer-events: none;
+      }
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50%;
+        background: linear-gradient(to bottom, transparent, var(--bg) 100%);
+        pointer-events: none;
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        padding: 48px 24px 56px;
+      }
+      @media (max-width: 640px) {
+        .hero {
+          min-height: 38vh;
+        }
+        .hero-inner {
+          padding: 36px 20px 48px;
+        }
       }
       .hero-title {
         margin: 0 0 16px;
@@ -174,11 +224,36 @@
         font-weight: 600;
       }
 
-      /* Apps - 2x2 grid */
+      /* Apps – full-width section so 3 cards get similar width to old 2-column layout */
+      #apps {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        box-sizing: border-box;
+      }
+      .apps-inner {
+        /* max-width: 1320px; */
+        /* max-width: 1250px; */
+        max-width: 1350px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      #apps .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        font-size: 42px;
+        text-align: center;
+      }
       .projects-list {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .projects-list {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       @media (max-width: 640px) {
         .projects-list {
@@ -190,43 +265,85 @@
         border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
-        transition: border-color 0.2s;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.3s;
       }
       .project-card:hover {
         border-color: var(--muted);
       }
+      .project-card[data-app="unreleased-vault"] {
+        border-color: rgba(0, 100, 180, 0.3);
+        box-shadow:
+          0 0 30px rgba(0, 100, 180, 0.06),
+          0 0 40px rgba(64, 224, 208, 0.06);
+      }
+      .project-card[data-app="unreleased-vault"]:hover {
+        box-shadow:
+          0 0 24px rgba(0, 100, 180, 0.12),
+          0 0 36px rgba(64, 224, 208, 0.1);
+      }
+      .project-card[data-app="blaze"] {
+        border-color: rgba(255, 120, 0, 0.3);
+        box-shadow: 0 0 30px rgba(255, 120, 0, 0.08);
+      }
+      .project-card[data-app="blaze"]:hover {
+        box-shadow: 0 0 24px rgba(255, 120, 0, 0.15);
+      }
+      .project-card[data-app="noeye"] {
+        border-color: rgba(139, 92, 246, 0.3);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
+      }
+      .project-card[data-app="noeye"]:hover {
+        box-shadow: 0 0 24px rgba(139, 92, 246, 0.15);
+      }
+      /* Image section: square so it has similar width and height like reference (~70% of card) */
       .project-visual {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 2 / 1;
         background: rgba(20, 20, 20, 0.9);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 48px;
+        padding: 0;
       }
       .project-visual img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
+      /* Fixed body height so blue link and skills align across all cards */
       .project-body {
-        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        /* height: 220px; */
+        height: 280px;
+        min-height: 220px;
+        padding: 24px 24px 24px;
       }
       .project-desc {
+        flex: 1;
+        min-height: 0;
         margin: 0 0 16px;
-        font-size: 15px;
+        font-size: 14px;
+        line-height: 1.5;
         color: var(--muted);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
       }
       .project-title {
-        margin: 0 0 8px;
-        font-size: 18px;
+        margin: 0 0 10px;
+        font-size: 17px;
         font-weight: 600;
       }
       .project-meta {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
+        margin-top: 4px;
       }
       .project-link {
         font-size: 14px;
@@ -250,6 +367,7 @@
       }
       .project-tags-below {
         flex-basis: 100%;
+        margin-top: 4px;
       }
 
       .project-visual {
@@ -259,13 +377,7 @@
       .project-card[data-app] {
         cursor: pointer;
       }
-      .project-card[data-app] .project-visual {
-        padding: 0;
-      }
       .project-card[data-app] .project-visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
         border-radius: 0;
       }
 
@@ -445,11 +557,31 @@
         color: var(--muted);
         margin: 0 0 8px;
       }
-      .experience-item p {
+      .experience-item p,
+      .experience-bullets {
         margin: 0;
         font-size: 14px;
         color: var(--muted);
         line-height: 1.5;
+      }
+      .experience-bullets {
+        padding-left: 1em;
+        list-style: none;
+      }
+      .experience-bullets li {
+        position: relative;
+        padding-left: 0.1em;
+        margin-bottom: 0.35em;
+      }
+      .experience-bullets li::before {
+        content: "•";
+        position: absolute;
+        left: -1.1em;
+        color: var(--muted);
+        opacity: 0.8;
+      }
+      .experience-bullets li:last-child {
+        margin-bottom: 0;
       }
       .experience-link {
         color: var(--accent);
@@ -714,191 +846,207 @@
   </head>
 
   <body>
-    <main class="wrap">
-      <header class="hero-minimal">
-        <h1 class="hero-title">JL</h1>
-        <p class="hero-tagline">Passionate about creating</p>
-        <p class="hero-bio">
-          <!-- I build mobile and web apps that I genuinely believe in — -->
-          I design and build full-stack apps with a focus on mobile apps. Clean
-          architecture, strong UX, and shipping end-to-end are my focus.
-        </p>
-        <div class="hero-cta">
-          <button class="btn btn-text contactBtn">Contact</button>
-          <a
-            class="btn btn-text"
-            href="https://github.com/distinctmind"
-            target="_blank"
-            >GitHub</a
-          >
-          <a
-            class="btn btn-text"
-            href="https://www.linkedin.com/in/jeanlouisrebello/"
-            target="_blank"
-            >LinkedIn</a
-          >
+    <main>
+      <header class="hero hero-image">
+        <div class="hero-inner">
+          <h1 class="hero-title">JL</h1>
+          <p class="hero-tagline">Passionate about creating</p>
+          <p class="hero-bio">I build the apps that don't exist.</p>
+          <div class="hero-cta">
+            <a
+              class="btn btn-text"
+              href="https://github.com/distinctmind"
+              target="_blank"
+              >GitHub</a
+            >
+            <a
+              class="btn btn-text"
+              href="https://www.linkedin.com/in/jeanlouisrebello/"
+              target="_blank"
+              >LinkedIn</a
+            >
+          </div>
         </div>
       </header>
 
-      <section id="apps">
-        <h2 class="section-title">Apps</h2>
-        <div class="projects-list">
-          <div
-            class="project-card"
-            data-app="unreleased-vault"
-            role="button"
-            tabindex="0"
-          >
-            <div class="project-visual">
+      <div class="wrap">
+        <section id="apps">
+          <div class="apps-inner">
+            <h2 class="section-title">Creations</h2>
+            <div class="projects-list">
+              <div
+                class="project-card"
+                data-app="unreleased-vault"
+                role="button"
+                tabindex="0"
+              >
+                <div class="project-visual">
+                  <img
+                    src="./assets/unreleased-vault/dashboard.png"
+                    alt="Unreleased Vault dashboard"
+                  />
+                </div>
+                <div class="project-body">
+                  <h3 class="project-title">
+                    Unreleased Vault — For Musicians
+                  </h3>
+                  <p class="project-desc">
+                    Production web app built with Next.js and Prisma. Designed
+                    secure auth flows, user sync with Firebase, relational
+                    schema modeling, and role-based access control for
+                    collaborative asset management.
+                  </p>
+                  <div class="project-meta">
+                    <a
+                      href="https://unreleased-vault.vercel.app/"
+                      target="_blank"
+                      class="project-link"
+                      >View Web App →</a
+                    >
+                    <span class="project-tags">
+                      <span>Next.js</span>
+                      <span>Prisma</span>
+                      <span>PostgreSQL (Neon)</span>
+                      <span>Firebase Auth</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="project-card"
+                data-app="blaze"
+                role="button"
+                tabindex="0"
+              >
+                <div class="project-visual">
+                  <img src="./assets/blaze/cover.PNG" alt="Blaze dashboard" />
+                </div>
+                <div class="project-body">
+                  <h3 class="project-title">Blaze — Gamified Growth</h3>
+                  <p class="project-desc">
+                    iOS & Android app for tracking personal growth throughout
+                    year. Accomplish missions in life, gain stardust, compete
+                    with friends.
+                    <!-- Streaks, monthly overviews, and social accountability features. -->
+                  </p>
+                  <div class="project-meta">
+                    <span class="project-link">Coming soon</span>
+                    <span class="project-tags project-tags-below">
+                      <span>React Native</span>
+                      <span>Expo</span>
+                      <span>Supabase</span>
+                      <span>OTA</span>
+                      <span>Sentry</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <a
+                href="https://apps.apple.com/us/app/noeye/id6751863604"
+                target="_blank"
+                class="project-card"
+                data-app="noeye"
+              >
+                <div class="project-visual">
+                  <img src="./assets/noeye-icon.png" alt="NoEye app" />
+                </div>
+                <div class="project-body">
+                  <h3 class="project-title">NoEye — Metadata Privacy App</h3>
+                  <p class="project-desc">
+                    View, remove, and edit photo metadata (EXIF) with selective
+                    field control. Trust-first UX: preview exactly what will be
+                    removed before saving.
+                  </p>
+                  <div class="project-meta">
+                    <span class="project-link">View on App Store →</span>
+                    <span class="project-tags">
+                      <span>Expo</span>
+                      <span>React Native</span>
+                      <span>TypeScript</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience">
+          <h2 class="section-title">Experience</h2>
+          <div class="experience-list">
+            <div class="experience-item">
               <img
-                src="./assets/unreleased-vault/dashboard.png"
-                alt="Unreleased Vault dashboard"
+                src="./assets/knewplay-icon.png"
+                alt="Knewplay"
+                class="experience-icon"
               />
+              <div class="experience-content">
+                <div class="experience-title">Mobile Engineer</div>
+                <div class="experience-meta">Knewplay · Ottawa</div>
+                <div class="experience-dates">May 2024 – Dec 2024 · 8 mos</div>
+                <ul class="experience-bullets">
+                  <li>
+                    Co-developed a
+                    <a
+                      href="https://apps.apple.com/us/app/anchpor-asset-assistant/id6504777563"
+                      target="_blank"
+                      class="experience-link"
+                      >financial assets app</a
+                    >
+                    using React Native, TypeScript, and Expo.
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="project-body">
-              <h3 class="project-title">Unreleased Vault — For Musicians</h3>
-              <p class="project-desc">
-                Production web app built with Next.js and Prisma. Designed
-                secure auth flows, user sync with Firebase, relational schema
-                modeling, and role-based access control for collaborative asset
-                management.
-              </p>
-              <div class="project-meta">
-                <a
-                  href="https://unreleased-vault.vercel.app/"
-                  target="_blank"
-                  class="project-link"
-                  >View Web App →</a
-                >
-                <span class="project-tags">
-                  <span>Next.js</span>
-                  <span>Prisma</span>
-                  <span>PostgreSQL (Neon)</span>
-                  <span>Firebase Auth</span>
-                </span>
+            <div class="experience-item">
+              <img
+                src="./assets/golfnorth-icon.png"
+                alt="Golf North"
+                class="experience-icon"
+              />
+              <div class="experience-content">
+                <div class="experience-title">React Native Developer</div>
+                <div class="experience-meta">
+                  Golf North Properties · Canada · Remote
+                </div>
+                <div class="experience-dates">
+                  Jul 2022 – Sep 2023 · 1 yr 3 mos
+                </div>
+                <ul class="experience-bullets">
+                  <li>
+                    Integrated new features into the mobile app responsible for
+                    managing golf reservations and payments.
+                  </li>
+                  <li>Refactored existing code.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="experience-item">
+              <img
+                src="./assets/bluecat-icon.png"
+                alt="BlueCat"
+                class="experience-icon"
+              />
+              <div class="experience-content">
+                <div class="experience-title">Software Developer</div>
+                <div class="experience-meta">
+                  BlueCat · Greater Toronto Area, Canada
+                </div>
+                <div class="experience-dates">Sep 2018 – Apr 2019 · 8 mos</div>
+                <ul class="experience-bullets">
+                  <li>
+                    Developed enterprise features in product used by Apple and
+                    Google.
+                  </li>
+                  <li>Collaborated cross-team in an agile environment.</li>
+                  <li>Presented demos to stakeholders.</li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="project-card" data-app="blaze" role="button" tabindex="0">
-            <div class="project-visual">
-              <img src="./assets/blaze/cover.PNG" alt="Blaze dashboard" />
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Blaze — Gamified Growth</h3>
-              <p class="project-desc">
-                iOS & Android app for tracking personal growth throughout year.
-                Accomplish missions in life, gain stardust, compete with
-                friends.
-                <!-- Streaks, monthly overviews, and social accountability features. -->
-              </p>
-              <div class="project-meta">
-                <span class="project-link">Coming soon</span>
-                <span class="project-tags project-tags-below">
-                  <span>React Native</span>
-                  <span>Expo</span>
-                  <span>Supabase</span>
-                  <span>OTA</span>
-                  <span>Sentry</span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <a
-            href="https://apps.apple.com/us/app/noeye/id6751863604"
-            target="_blank"
-            class="project-card"
-          >
-            <div class="project-visual">
-              <img src="./assets/noeye-icon.png" alt="NoEye app" />
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">NoEye — Metadata Privacy App</h3>
-              <p class="project-desc">
-                View, remove, and edit photo metadata (EXIF) with selective
-                field control. Trust-first UX: preview exactly what will be
-                removed before saving.
-              </p>
-              <div class="project-meta">
-                <span class="project-link">View on App Store →</span>
-                <span class="project-tags">
-                  <span>Expo</span>
-                  <span>React Native</span>
-                  <span>TypeScript</span>
-                </span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </section>
+        </section>
 
-      <section id="experience">
-        <h2 class="section-title">Experience</h2>
-        <div class="experience-list">
-          <div class="experience-item">
-            <img
-              src="./assets/knewplay-icon.png"
-              alt="Knewplay"
-              class="experience-icon"
-            />
-            <div class="experience-content">
-              <div class="experience-title">Mobile Engineer</div>
-              <div class="experience-meta">Knewplay · Ottawa</div>
-              <div class="experience-dates">May 2024 – Dec 2024 · 8 mos</div>
-              <p>
-                Led full-cycle development of a
-                <a
-                  href="https://apps.apple.com/us/app/anchpor-asset-assistant/id6504777563"
-                  target="_blank"
-                  class="experience-link"
-                  >financial assets app</a
-                >
-                using React Native, TypeScript, and Expo. Built E2E test suites
-                with Maestro.
-              </p>
-            </div>
-          </div>
-          <div class="experience-item">
-            <img
-              src="./assets/golfnorth-icon.png"
-              alt="Golf North"
-              class="experience-icon"
-            />
-            <div class="experience-content">
-              <div class="experience-title">React Native Developer</div>
-              <div class="experience-meta">
-                Golf North Properties · Canada · Remote
-              </div>
-              <div class="experience-dates">
-                Jul 2022 – Sep 2023 · 1 yr 3 mos
-              </div>
-              <p>
-                Integrated receipt printing via Printer SDK + native modules +
-                backend APIs into a reusable hook. Onboarded teammates and
-                reviewed PRs.
-              </p>
-            </div>
-          </div>
-          <div class="experience-item">
-            <img
-              src="./assets/bluecat-icon.png"
-              alt="BlueCat"
-              class="experience-icon"
-            />
-            <div class="experience-content">
-              <div class="experience-title">Software Developer</div>
-              <div class="experience-meta">
-                BlueCat · Greater Toronto Area, Canada
-              </div>
-              <div class="experience-dates">Sep 2018 – Apr 2019 · 8 mos</div>
-              <p>
-                Developed enterprise features and collaborated cross-team in an
-                agile environment. Presented demos to stakeholders.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+        <!-- Skills section commented out for now
       <section id="skills">
         <h2 class="section-title">Skills</h2>
         <div class="skills-grid">
@@ -966,10 +1114,12 @@
           </div>
         </div>
       </section>
+      -->
 
-      <footer class="footer">
-        Made with <span class="footer-heart" aria-hidden="true"></span>
-      </footer>
+        <footer class="footer">
+          Made with <span class="footer-heart" aria-hidden="true"></span>
+        </footer>
+      </div>
     </main>
 
     <div class="popup-overlay" id="contactPopup">
