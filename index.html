@@ -83,7 +83,7 @@
       .hero {
         position: relative;
         width: 100%;
-        min-height: 45vh;
+        min-height: 52vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -115,38 +115,51 @@
       .hero-inner {
         position: relative;
         z-index: 1;
-        max-width: 640px;
-        padding: 48px 24px 56px;
+        max-width: 720px;
+        padding: 56px 24px 64px;
       }
       @media (max-width: 640px) {
         .hero {
-          min-height: 38vh;
+          min-height: 42vh;
         }
         .hero-inner {
-          padding: 36px 20px 48px;
+          padding: 40px 20px 52px;
         }
       }
       .hero-title {
-        margin: 0 0 16px;
-        font-size: 120px;
+        margin: 0 0 12px;
+        font-size: 96px;
         font-weight: 900;
         letter-spacing: -4px;
         text-transform: uppercase;
         color: #fff;
+        line-height: 0.95;
         text-shadow:
           0 0 20px rgba(255, 255, 255, 0.3),
           0 0 40px rgba(0, 212, 255, 0.2);
       }
       @media (max-width: 640px) {
         .hero-title {
-          font-size: 72px;
+          font-size: 64px;
           letter-spacing: -2px;
         }
       }
+      .hero-eyebrow {
+        margin: 0 auto 20px;
+        max-width: 520px;
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+      }
       .hero-tagline {
-        margin: 0 0 28px;
-        font-size: 24px;
-        font-weight: 600;
+        margin: 0 auto 16px;
+        max-width: 640px;
+        font-size: clamp(28px, 5vw, 42px);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
         background: linear-gradient(
           90deg,
           #00ffff,
@@ -169,18 +182,26 @@
           background-position: 300% center;
         }
       }
-      .hero-bio {
-        margin: 0 auto 28px;
-        max-width: 480px;
-        font-size: 16px;
-        color: var(--muted);
-        line-height: 1.6;
+      .hero-subtitle {
+        margin: 0 auto 32px;
+        max-width: 560px;
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.55;
+        letter-spacing: 0.01em;
+      }
+      .hero-subtitle .hero-skill {
+        color: rgba(255, 255, 255, 0.45);
+        font-weight: 400;
+        padding: 0 0.35em;
       }
       .hero-cta {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
         justify-content: center;
+        margin-top: 4px;
       }
       .btn {
         display: inline-flex;
@@ -850,8 +871,11 @@
       <header class="hero hero-image">
         <div class="hero-inner">
           <h1 class="hero-title">JL</h1>
+          <p class="hero-eyebrow">I build the apps that don't exist.</p>
           <p class="hero-tagline">Passionate about creating</p>
-          <p class="hero-bio">I build the apps that don't exist.</p>
+          <p class="hero-subtitle">
+            React Native Engineer<span class="hero-skill">·</span>TypeScript<span class="hero-skill">·</span>Native iOS Integrations
+          </p>
           <div class="hero-cta">
             <a
               class="btn btn-text"
@@ -986,14 +1010,27 @@
                 <div class="experience-dates">May 2024 – Dec 2024 · 8 mos</div>
                 <ul class="experience-bullets">
                   <li>
-                    Co-developed a
+                    Built and shipped a cross-platform
                     <a
                       href="https://apps.apple.com/us/app/anchpor-asset-assistant/id6504777563"
                       target="_blank"
                       class="experience-link"
-                      >financial assets app</a
+                      >financial application</a
                     >
-                    using React Native, TypeScript, and Expo.
+                    using React Native, Expo, TypeScript, SQLite/Drizzle ORM,
+                    Firebase, and React Query.
+                  </li>
+                  <li>
+                    Implemented offline-first local persistence and
+                    synchronization flows.
+                  </li>
+                  <li>
+                    Reduced regression issues by building E2E test coverage with
+                    Maestro for critical onboarding and payment flows.
+                  </li>
+                  <li>
+                    Managed production mobile releases and deployment workflows
+                    using Expo and EAS.
                   </li>
                 </ul>
               </div>
@@ -1014,10 +1051,22 @@
                 </div>
                 <ul class="experience-bullets">
                   <li>
-                    Integrated new features into the mobile app responsible for
-                    managing golf reservations and payments.
+                    Integrated Star Micronics POS hardware SDKs into React
+                    Native through custom native modules in Swift and
+                    Objective-C.
                   </li>
-                  <li>Refactored existing code.</li>
+                  <li>
+                    Built reusable POS printing infrastructure used across
+                    mobile checkout workflows.
+                  </li>
+                  <li>
+                    Collaborated with backend APIs and Stripe integrations to
+                    support payment and checkout flows.
+                  </li>
+                  <li>
+                    Mentored interns through onboarding, setup, and pull request
+                    reviews.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -1035,11 +1084,18 @@
                 <div class="experience-dates">Sep 2018 – Apr 2019 · 8 mos</div>
                 <ul class="experience-bullets">
                   <li>
-                    Developed enterprise features in product used by Apple and
-                    Google.
+                    Developed internal networking and enterprise management
+                    features in a large-scale software platform used by Apple,
+                    Facebook, and JPMC.
                   </li>
-                  <li>Collaborated cross-team in an agile environment.</li>
-                  <li>Presented demos to stakeholders.</li>
+                  <li>
+                    Collaborated within agile engineering teams across
+                    frontend/backend workflows.
+                  </li>
+                  <li>
+                    Prepared and presented demos in front of stakeholders and
+                    managers.
+                  </li>
                 </ul>
               </div>
             </div>
